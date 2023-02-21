@@ -1,11 +1,18 @@
 import React, { useRef } from "react";
 import { useState } from "react";
 import classes from "./AuthForm.module.css";
+import { authActions } from "../store/Auth-slice";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
   const [isValid, setIsValid] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
+
+  const dispatch=useDispatch();
+ const history=useHistory();
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -79,6 +86,8 @@ function AuthForm() {
         })
         .then((data) => {
           console.log(data);
+          history.replace('/welcomepage')
+          dispatch(authActions.login(data.idToken))
           localStorage.setItem("token", data.idToken);
           localStorage.setItem("email", data.email);
         })
@@ -101,7 +110,7 @@ function AuthForm() {
                 <label htmlFor="emial">Email</label>
               </div>
               <div>
-                <input type="email" ref={emailInputRef} required></input>
+                <input type="email" ref={emailInputRef} required  autoComplete="email"></input>
               </div>
             </div>
             <div>
@@ -115,6 +124,7 @@ function AuthForm() {
                   value={password}
                   onChange={handlePasswordchange}
                   required
+                 
                 ></input>
               </div>
             </div>
