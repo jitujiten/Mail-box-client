@@ -1,22 +1,26 @@
-import AuthForm from "./component/Login/AuthForm";
-import WelcomePage from "./component/Pages/Welcomepages";
-import { Route, Switch, Redirect } from "react-router-dom";
+import React from "react";
+import "./App.css";
+import AuthPage from "./components/Pages/AuthPage";
+import { Route } from "react-router-dom";
+import Mailfirst from "./components/Mail/ComposeMail";
+
+// import AuthPage from './components/Pages/AuthPage';
+// import { Route, Switch } from "react-router-dom"; 
 
 function App() {
   return (
-    <div className="container">
-      <Switch>
-        <Route path="*">
-          <Redirect to="authpage" />
-        </Route>
-        <Route path="/authpage">
-          <AuthForm />
-        </Route>
-        <Route path="/welcomepage">
-          <WelcomePage />
-        </Route>
-      </Switch>
-    </div>
+    <main>
+      <h1>MailBox</h1>
+      <Route path="/" exact>
+        <AuthPage />
+      </Route>
+      <Route path="/auth" exact>
+        <AuthPage />
+      </Route>
+      <Route path="/mail">
+        <Mailfirst />
+      </Route>
+    </main>
   );
 }
 
