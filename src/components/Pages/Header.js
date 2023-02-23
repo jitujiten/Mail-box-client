@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 
-const Header = () => {
+const Header = (event) => {
 
   return (
     <Nav fill variant="tabs" defaultActiveKey="/home">
@@ -9,8 +9,8 @@ const Header = () => {
         <Nav.Link href="/mail">MailBox</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="/auth" eventKey="link-1">
-          Coming Soon-1
+        <Nav.Link href="/inbox" eventKey="link-1">
+        Inbox
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
