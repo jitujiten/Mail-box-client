@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import Header from "../Pages/Header";
 
 import { Fragment } from "react";
 import { Button, Form } from "react-bootstrap";
@@ -60,7 +61,7 @@ function Mailfirst() {
       const data = await res.json();
 
       fetch(
-        `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${receivedEmail}/received.json`,
+        `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${receivedEmail}/received/${data.name}.json`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -94,7 +95,7 @@ function Mailfirst() {
       const data = await res.json();
 
       fetch(
-        `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${emailSender}/sent.json`,
+        `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${emailSender}/sent/${data.name}.json`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -118,55 +119,52 @@ function Mailfirst() {
 
   return (
     <Fragment>
-      <Form>
-        <Form.Group>
-          <Form.Label>To</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            required
-            ref={EmailInputRef}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Subject</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Subject"
-            required
-            ref={subjectInputRef}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>message</Form.Label>
-          {/* <Form.Control
-            style={{ height: "350px" }}
-            type="text"
-            placeholder="Message"
-            required
-            ref={messageInputref}
-          /> */}
-          <Editor
-            // ref={messageInputref}
-            onChange={refHandler}
-            // // style={{ height: "500px", width: "500px" }}
-            toolbarClassName="toolbarClassName"
-            wrapperClassName="wrapperClassName"
-            editorClassName="editorClassName"
-            wrapperStyle={{
-              width: 1350,
-              height: 250,
-              border: "1px solid black",
-            }}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Button onClick={EmailSubmitHandler} type="button" variant="primary">
-            Submit
-          </Button>{" "}
-        </Form.Group>
-      </Form>
-    </Fragment>
+      
+    <Form>
+      <Form.Group>
+        <Form.Label>To</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Enter email"
+          required
+          ref={EmailInputRef}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Subject</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Subject"
+          required
+          ref={subjectInputRef}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>message</Form.Label>
+        {/* <Form.Control
+          style={{ height: "350px" }}
+          type="text"
+          placeholder="Message"
+          required
+          ref={messageInputref}
+        /> */}
+        <Editor
+          // ref={messageInputref}
+          onChange={refHandler}
+          // // style={{ height: "500px", width: "500px" }}
+          toolbarClassName="toolbarClassName"
+          wrapperClassName="wrapperClassName"
+          editorClassName="editorClassName"
+          wrapperStyle={{ width: 1350,height: 250, border: "1px solid black" }}
+        />
+      </Form.Group>
+      <Form.Group>
+        <Button onClick={EmailSubmitHandler} type="button" variant="primary">
+          Submit
+        </Button>{" "}
+      </Form.Group>
+    </Form>
+  </Fragment>
   );
 }
 

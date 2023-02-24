@@ -16,11 +16,7 @@ const SentMailss = (props) => {
                 <Col>to--{to}</Col>
                 <Col xs={6}>subject--{subject}</Col>
 
-                <Col>
-                  <Badge pill bg="info">
-                    *
-                  </Badge>{" "}
-                </Col>
+               
               </Row>
             </Link>
           </div>

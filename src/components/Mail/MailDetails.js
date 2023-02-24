@@ -14,17 +14,22 @@ const MailDetails = () => {
 
   const DeletemailHandler = () => {
     fetch(
-        `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/received/${Id}.json`,
-        {
-          method: "DELETE",
-        }
-      );
+      `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/received/${Id}.json`,
+      {
+        method: "DELETE",
+      }
+    );
     alert("Delete mail handler is working");
-    <Redirect to="/inbox" />
+    <Redirect to="/inbox" />;
   };
 
   return (
     <Fragment>
+      <div className="d-grid gap-2">
+        <Button variant="primary" size="lg" href="/mail">
+          @jitu-MailBox
+        </Button>
+      </div>
       <Card style={{ width: "90rem" }}>
         <Card.Body>
           <Card.Title>

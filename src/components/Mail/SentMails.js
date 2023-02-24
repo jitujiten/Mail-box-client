@@ -12,17 +12,20 @@ const ShowsentMail = (props) => {
   const [resmails, setMails] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/sent.json`
-      )
-      .then((res) => {
-        console.log(res.data);
-        setMails(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setInterval(() => {
+        axios
+        .get(
+          `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/sent.json`
+        )
+        .then((res) => {
+          console.log(res.data);
+          setMails(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 2000);
+   
   }, []);
 
   if (resmails === null) {
@@ -30,6 +33,7 @@ const ShowsentMail = (props) => {
   }
 
   const result = Object.values(resmails);
+  result.reverse();
 
   return (
     <>

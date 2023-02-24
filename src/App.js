@@ -1,8 +1,7 @@
 import React from "react";
 import "./App.css";
 import AuthPage from "./components/Pages/AuthPage";
-import { Route } from "react-router-dom";
-import Mailfirst from "./components/Mail/ComposeMail";
+import { Route ,Redirect} from "react-router-dom";
 import Inbox from "./components/Mail/Inbox";
 import MailDetails from "./components/Mail/MailDetails";
 import ManagedMails from "./components/Mail/ManagedMails";
@@ -14,12 +13,6 @@ import { Button } from "react-bootstrap";
 function App() {
   return (
     <main>
-      <div className="d-grid gap-2">
-        <Button variant="primary" size="lg">
-          @jitu-MailBox
-        </Button>
-      </div>
-
       <Route path="/" exact>
         <AuthPage />
       </Route>
