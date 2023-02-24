@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const emailSlice = createSlice({
   name: "email",
   initialState: {
@@ -23,13 +24,21 @@ const emailSlice = createSlice({
     },
     sentBox(state, action) {
       const sentEmail = action.payload;
-
+      
       state.sentEmails.push({
         id: sentEmail.id,
         to: sentEmail.to,
         subject: sentEmail.subject,
         message: sentEmail.message,
       });
+    },
+    UncreaseUnreadEmail(state) {
+      state.unread = state.unread + 1;
+    },
+    reduceUnreadEmails(state) {
+      if (state.unread > 0) {
+        state.unread = state.unread - 1;
+      }
     },
   },
 });

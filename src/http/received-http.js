@@ -10,20 +10,18 @@ const useReceivedDataHttp = () => {
     setInterval(() => {
       axios
         .get(
-          `https://mail-box01-default-rtdb.firebaseio.com/${email}/received.json`
+          `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/received.json`
         )
         .then((res) => {
-          // console.log(res.data);
           setMails(res.data);
         })
         .catch((err) => {
-          // console.log(err);
         });
     }, 2000);
   }, [email]);
 
   if (resmails === null) {
-    return <h2>You have no mail</h2>;
+    return "";
   }
 
   const result = Object.values(resmails);

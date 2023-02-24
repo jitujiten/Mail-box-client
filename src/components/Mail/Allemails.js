@@ -1,22 +1,23 @@
-import React, { Fragment,useState } from "react";
-import { Col, Container, Row, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import classes from './Allmails.module.css';
-import {Button} from "react-bootstrap";
+import React, { Fragment, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+
+import classes from "./Allmails.module.css";
+import { Button } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 
 const AllEmails = (props) => {
-  const { from, subject, id, message,read } = props.item;
+  const { from, subject, id, message, read } = props.item;
 
   let email = localStorage.getItem("Email").replace(".", "").replace("@", "");
   let checkread = read;
-  // console.log("inside allMails", checkread);
+  const [show, setShow] = useState(false);
 
-
-  const seenLIke = async () => {
-    console.log("inside seenlike");
-    console.log(id);
-   await fetch(
-      `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/recived/${id}.json`,
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+  
+    fetch(
+      `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/received/${id}.json`,
       {
         method: "PATCH",
         body: JSON.stringify({
@@ -24,29 +25,67 @@ const AllEmails = (props) => {
         }),
       }
     );
-    // console.log("Seen check");
+    setShow(true);
   };
+  const handleClose1 = () => {
+    fetch(
+      `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/received/${id}.json`,
+      {
+        method: "DELETE",
+      }
+    )
+    alert("Are you sure you want to delete?");
+    setShow(false);
+  };
+ 
 
-  let seenCheck = (checkread === true) ? "* " : " ";
-  // console.log(seenCheck);
+  //////////=====working with modals
 
-
+  let seenCheck = checkread === true ? "💥💥💥" : " ";
+ 
   return (
     <Fragment>
-    <div>
-      <Container className="justify-content-md-center" onClick={seenLIke}>
-        <div className={classes.dv1}>
-          <Link to={{ pathname: "/inbox/details", state: props }}>
+      <div>
+        <Container className="justify-content-md-center" onClick={handleShow}>
+          <div className={classes.dv1}>
             <Row>
               <Col>from--{from}</Col>
               <Col xs={6}>subject--{subject}</Col>
               {seenCheck}
             </Row>
-          </Link>
-        </div>
-      </Container>
-    </div>
-  </Fragment>
+          </div>
+        </Container>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>FROM--{from}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Subject--{subject}</Form.Label>
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label>MESAGE--{message}</Form.Label>
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="danger" onClick={handleClose1}>
+              Delete Mail
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    </Fragment>
   );
 };
 

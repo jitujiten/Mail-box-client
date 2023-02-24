@@ -1,33 +1,25 @@
 import React, { useRef, useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import Header from "../Pages/Header";
-
-import { Fragment } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import { Button, Form } from "react-bootstrap";
 import { emailActions } from "../store/email-redux";
 import { useDispatch } from "react-redux";
-// import { Fragment } from "react-bootstrap/dist/react-bootstrap";
 
-function Mailfirst() {
+const Mailfirst=()=> {
   const [message, Setmessage] = useState();
   const EmailInputRef = useRef();
   const subjectInputRef = useRef();
-  // const messageInputref = useRef();
 
   const refHandler = (event) => {
-    console.log(event.blocks[0].text);
     Setmessage(event.blocks[0].text);
   };
 
   let dispatch = useDispatch();
 
   const EmailSubmitHandler = (event) => {
-    console.log("insided mail");
-    // event.preventDefault();
     const receiverEmail = EmailInputRef.current.value;
     const enteredSubject = subjectInputRef.current.value;
-    // const enteredMessage = messageInputref.current.value;
 
     let receivedEmail = receiverEmail.replace(".", "").replace("@", "");
     let SenderEmail = localStorage.getItem("Email");
@@ -120,53 +112,58 @@ function Mailfirst() {
   };
 
   return (
-    <Fragment>
-      
-    <Form>
-      <Form.Group>
-        <Form.Label>To</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          required
-          ref={EmailInputRef}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Subject</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Subject"
-          required
-          ref={subjectInputRef}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>message</Form.Label>
-        {/* <Form.Control
-          style={{ height: "350px" }}
-          type="text"
-          placeholder="Message"
-          required
-          ref={messageInputref}
-        /> */}
-        <Editor
-          // ref={messageInputref}
-          onChange={refHandler}
-          // // style={{ height: "500px", width: "500px" }}
-          toolbarClassName="toolbarClassName"
-          wrapperClassName="wrapperClassName"
-          editorClassName="editorClassName"
-          wrapperStyle={{ width: 1490,height: 250, border: "1px solid black" }}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Button onClick={EmailSubmitHandler} type="button" variant="primary">
-          Submit
-        </Button>{" "}
-      </Form.Group>
-    </Form>
-  </Fragment>
+    <Container className="justify-content-md-center">
+      <Row>
+        <Col xs={10}>
+          <Form>
+            <Form.Group>
+              <Form.Label>To</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                required
+                ref={EmailInputRef}
+                className="bg-warning"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Subject</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Subject"
+                required
+                ref={subjectInputRef}
+                className="bg-warning"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>message</Form.Label>
+
+              <Editor
+                onChange={refHandler}
+                toolbarClassName="toolbarClassName"
+                wrapperClassName="wrapperClassName"
+                editorClassName="editorClassName"
+                wrapperStyle={{
+                  border: "1px solid black",
+                  borderRadius: "5px",
+                  minHeight: "250px",
+                }}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Button
+                onClick={EmailSubmitHandler}
+                type="button"
+                variant="warning"
+              >
+                Submit
+              </Button>{" "}
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

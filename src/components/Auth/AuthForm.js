@@ -5,7 +5,7 @@ import classes from "./AuthForm.module.css";
 import { authActions } from "../store/Auth-redux";
 
 const AuthForm = () => {
-  // console.log("insideAuth");
+  
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setisLoading] = useState();
   const emailInputref = useRef();
@@ -48,23 +48,15 @@ const AuthForm = () => {
       .then((res) => {
         setisLoading(false);
         if (res.ok) {
-          //...
           return res.json();
         } else {
-          //...
           return res.json().then((data) => {
-            // show an error modal
             let eroorMessage = "Authentication failed";
-            // if (data && data.error && data.error.message) {
-            //   eroorMessage = data.error.message;
-            // }
-
             throw new Error(eroorMessage);
           });
         }
       })
       .then((data) => {
-        console.log(data);
         dispatch(authActions.login(data.idToken));
         setlogingState(true);
         localStorage.setItem("Email", enteredEmail);

@@ -1,5 +1,8 @@
 .dv1 {
-    margin-top: 10px;
+    margin-top: 2%;
     margin-bottom: 10px;
-    background-color: aquamarine;
+    background-color: yellow;
+    border: 2px solid rgb(1, 2, 3);
+    padding: 1%;
+    border-radius: 10px;
 }
