@@ -4,9 +4,8 @@ import { Redirect } from "react-router-dom";
 import classes from "./AuthForm.module.css";
 import { authActions } from "../store/Auth-redux";
 
-
 const AuthForm = () => {
-  console.log("insideAuth");
+  // console.log("insideAuth");
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setisLoading] = useState();
   const emailInputref = useRef();
@@ -51,7 +50,6 @@ const AuthForm = () => {
         if (res.ok) {
           //...
           return res.json();
-          
         } else {
           //...
           return res.json().then((data) => {
@@ -69,7 +67,7 @@ const AuthForm = () => {
         console.log(data);
         dispatch(authActions.login(data.idToken));
         setlogingState(true);
-        localStorage.setItem("Email",enteredEmail);
+        localStorage.setItem("Email", enteredEmail);
       })
       .catch((err) => {
         alert(err.message);
@@ -100,7 +98,6 @@ const AuthForm = () => {
           )}
           {isLoading && <p>Sending Request....</p>}
         </div>
-        
       </form>
       <button
         type="button"

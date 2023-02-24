@@ -5,14 +5,21 @@ import { Route } from "react-router-dom";
 import Mailfirst from "./components/Mail/ComposeMail";
 import Inbox from "./components/Mail/Inbox";
 import MailDetails from "./components/Mail/MailDetails";
-
+import ManagedMails from "./components/Mail/ManagedMails";
+import Showsentedmails from "./components/Mail/SentDetails";
+import { Button } from "react-bootstrap";
 // import AuthPage from './components/Pages/AuthPage';
-// import { Route, Switch } from "react-router-dom"; 
+// import { Route, Switch } from "react-router-dom";
 
 function App() {
   return (
     <main>
-      <h1>MailBox</h1>
+      <div className="d-grid gap-2">
+        <Button variant="primary" size="lg">
+          @jitu-MailBox
+        </Button>
+      </div>
+
       <Route path="/" exact>
         <AuthPage />
       </Route>
@@ -23,10 +30,10 @@ function App() {
         <Inbox />
       </Route>
       <Route path="/inbox/details" exact>
-        <MailDetails />
+        <Showsentedmails />
       </Route>
       <Route path="/mail">
-        <Mailfirst />
+        <ManagedMails />
       </Route>
     </main>
   );

@@ -2,7 +2,7 @@ import AuthForm from "../Auth/AuthForm";
 
 
 const AuthPage = () => {
-  console.log("insideAuthdf");
+  // console.log("insideAuthdf");
   return <AuthForm />;
 };
 

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import Header from "../Pages/Header";
 
 import { Fragment } from "react";
 import { Button, Form } from "react-bootstrap";
@@ -10,7 +9,6 @@ import { useDispatch } from "react-redux";
 // import { Fragment } from "react-bootstrap/dist/react-bootstrap";
 
 function Mailfirst() {
-
   const [message, Setmessage] = useState();
   const EmailInputRef = useRef();
   const subjectInputRef = useRef();
@@ -120,7 +118,6 @@ function Mailfirst() {
 
   return (
     <Fragment>
-      <Header />
       <Form>
         <Form.Group>
           <Form.Label>To</Form.Label>
@@ -156,7 +153,11 @@ function Mailfirst() {
             toolbarClassName="toolbarClassName"
             wrapperClassName="wrapperClassName"
             editorClassName="editorClassName"
-            wrapperStyle={{ width: 1350,height: 250, border: "1px solid black" }}
+            wrapperStyle={{
+              width: 1350,
+              height: 250,
+              border: "1px solid black",
+            }}
           />
         </Form.Group>
         <Form.Group>

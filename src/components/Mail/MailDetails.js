@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Redirect, useLocation } from "react-router-dom";
-import Header from "../Pages/Header";
 import { Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
@@ -26,7 +25,6 @@ const MailDetails = () => {
 
   return (
     <Fragment>
-      <Header />
       <Card style={{ width: "90rem" }}>
         <Card.Body>
           <Card.Title>
