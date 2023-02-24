@@ -18,7 +18,7 @@ const emailSlice = createSlice({
         from: newEmail.from,
         subject: newEmail.subject,
         message: newEmail.message,
-
+        read: newEmail.read,
       });
     },
     sentBox(state, action) {

@@ -4,17 +4,24 @@ import Tabs from "react-bootstrap/Tabs";
 import Mailfirst from "./ComposeMail";
 import Inbox from "./Inbox";
 import ShowsentMail from "./SentMails";
-import { Button } from "react-bootstrap";
+import { Button,Badge } from "react-bootstrap";
+import useSendDataHttp from "../../http/sent-http";
+
 
 function ManagedMails() {
-  let check = 2;
+    let count = 0;
+    const result = useSendDataHttp();
+    result.map((item) => {
+      if (item.read === true) count++;
+    });
+
   return (
     <Fragment>
-     <div className="d-grid gap-2">
-        <Button variant="primary" size="lg" href="/mail">
-          @jitu-MailBox
-        </Button>
-      </div>
+    <div className="d-grid gap-2">
+      <Button variant="primary" size="lg" href="/mail">
+        @jitu-MailBox--"{count}"
+      </Button>
+    </div>
     <Tabs
       defaultActiveKey="compose"
       id="fill-tab-example"
@@ -31,7 +38,7 @@ function ManagedMails() {
         <ShowsentMail />
       </Tab>
     </Tabs>
-    </Fragment>
+  </Fragment>
   );
 }
 

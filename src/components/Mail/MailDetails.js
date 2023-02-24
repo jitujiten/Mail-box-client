@@ -12,15 +12,15 @@ const MailDetails = () => {
   let Id = product.item.id;
   console.log(Id);
 
-  const DeletemailHandler = () => {
-    fetch(
+  const DeletemailHandler = async () => {
+   await fetch(
       `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/received/${Id}.json`,
       {
         method: "DELETE",
       }
     );
     alert("Delete mail handler is working");
-    <Redirect to="/inbox" />;
+    <Redirect to="/mail" />;
   };
 
   return (
@@ -48,6 +48,9 @@ const MailDetails = () => {
           </Button>{" "}
         </Card.Body>
       </Card>
+      <Button variant="primary" href="/mail">
+          GotoMailbox
+        </Button>
     </Fragment>
   );
 };
